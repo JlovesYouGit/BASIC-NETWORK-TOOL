@@ -1,0 +1,67 @@
+2025-09-13 22:12:41,792 - modules.dashboard - INFO - Starting interactive dashboard
+2025-09-13 23:15:09,703 - modules.scanner - INFO - Nmap located at: C:\Users\JJ\Downloads\New folder (6)\project\..\break\nmap.exe
+2025-09-13 23:15:09,703 - modules.scanner - INFO - Scanning local network: 192.168.1.0/24
+2025-09-13 23:15:12,947 - modules.scanner - INFO - Found 0 devices on local network
+2025-09-13 23:18:10,733 - modules.scanner - INFO - Nmap located at: C:\Users\JJ\Downloads\New folder (6)\project\..\break\nmap.exe
+2025-09-13 23:18:10,735 - modules.dashboard - INFO - Starting interactive dashboard
+2025-09-13 23:18:16,050 - modules.scanner - INFO - Scanning server network: 192.168.1.0/24
+2025-09-13 23:18:23,189 - modules.scanner - INFO - Found 3 devices on server network
+2025-09-13 23:18:34,124 - modules.scanner - INFO - Fingerprinting device: 192.168.1.142
+2025-09-13 23:19:35,332 - modules.scanner - INFO - Scanning web server: example.com
+2025-09-13 23:19:55,227 - modules.scanner - INFO - Found 1 web servers
+2025-09-13 23:19:58,554 - modules.scanner - INFO - Fingerprinting device: 23.192.228.80
+2025-09-13 23:22:12,468 - modules.manager - INFO - Securely managing device: 23.192.228.80
+2025-09-13 23:22:12,470 - modules.manager - ERROR - SSH key file not found: admin
+2025-09-13 23:28:01,738 - modules.scanner - INFO - Scanning server network: 192.168.1.0/24
+2025-09-13 23:28:08,642 - modules.scanner - INFO - Found 3 devices on server network
+2025-09-13 23:28:13,446 - modules.scanner - INFO - Fingerprinting device: 192.168.1.142
+2025-09-13 23:30:38,914 - modules.scanner - INFO - Scanning server network: 192.168.1.0/24
+2025-09-13 23:30:45,140 - modules.scanner - INFO - Found 3 devices on server network
+2025-09-13 23:30:49,412 - modules.scanner - INFO - Fingerprinting device: 192.168.1.1
+2025-09-13 23:34:07,857 - modules.scanner - INFO - Scanning web server: example.com
+2025-09-13 23:34:27,141 - modules.scanner - INFO - Found 1 web servers
+2025-09-13 23:43:26,651 - modules.scanner - INFO - Nmap located at: C:\Users\JJ\Downloads\New folder (6)\project\..\break\nmap.exe
+2025-09-13 23:43:26,652 - modules.dashboard - INFO - Starting interactive dashboard
+2025-09-13 23:43:29,594 - modules.scanner - INFO - Scanning web server: example.com
+2025-09-13 23:43:36,402 - modules.scanner - ERROR - Nmap error scanning web server: b'<?xml version="1.0" encoding="UTF-8"?>\r\n<!DOCTYPE nmaprun>\r\n<?xml-stylesheet href="file:///c:/Users/JJ/Downloads/New folder (6)/break/nmap.xsl" type="text/xsl"?>\r\n<!-- Nmap 7.98 scan initiated Sat Sep 13 23:43:29 2025 as: nmap -oX - -p 21,22,23,25,53,80,110,143,443,993,995 -sV -T4 23.192.228.80 -->\r\n<nmaprun scanner="nmap" args="nmap -oX - -p 21,22,23,25,53,80,110,143,443,993,995 -sV -T4 23.192.228.80" start="1757821409" startstr="Sat Sep 13 23:43:29 2025" version="7.98" xmloutputversion="1.05">\r\n<scaninfo type="syn" protocol="tcp" numservices="11" services="21-23,25,53,80,110,143,443,993,995"/>\r\n<verbose level="0"/>\r\n<debugging level="0"/>\r\n<hosthint><status state="up" reason="unknown-response" reason_ttl="0"/>\r\n<address addr="23.192.228.80" addrtype="ipv4"/>\r\n<hostnames>\r\n</hostnames>\r\n</hosthint>\r\n'
+2025-09-13 23:43:36,402 - modules.scanner - INFO - Performing basic port scan on: example.com
+2025-09-13 23:59:28,534 - modules.scanner - INFO - Nmap located at: C:\Users\JJ\Downloads\New folder (6)\project\..\break\nmap.exe
+2025-09-13 23:59:28,548 - modules.enhanced_dashboard - INFO - Starting enhanced terminal dashboard
+2025-09-14 00:01:51,267 - modules.scanner - INFO - Fingerprinting device: 23.192.228.80
+2025-09-14 00:02:26,275 - modules.manager - INFO - Securely managing device: 23.192.228.80
+2025-09-14 00:02:26,275 - modules.manager - INFO - Auto-detecting SSH key for 23.192.228.80
+2025-09-14 00:02:26,278 - modules.manager - INFO - Resolved hostname for 23.192.228.80: example.com
+2025-09-14 00:02:26,279 - modules.manager - INFO - Found 0 potential SSH keys for 23.192.228.80
+2025-09-14 00:02:26,279 - modules.manager - WARNING - No SSH key found for 23.192.228.80
+2025-09-14 00:02:26,279 - modules.manager - ERROR - No SSH key found for device 23.192.228.80
+2025-09-14 00:03:09,313 - modules.scanner - INFO - Fingerprinting device: 23.192.228.80
+2025-09-14 00:03:51,780 - modules.manager - INFO - Securely managing device: 23.192.228.80
+2025-09-14 00:03:51,780 - modules.manager - INFO - Auto-detecting SSH key for 23.192.228.80
+2025-09-14 00:03:51,780 - modules.manager - INFO - Found 0 potential SSH keys for 23.192.228.80
+2025-09-14 00:03:51,781 - modules.manager - WARNING - No SSH key found for 23.192.228.80
+2025-09-14 00:03:51,781 - modules.manager - ERROR - No SSH key found for device 23.192.228.80
+2025-09-14 00:04:55,717 - modules.scanner - INFO - Fingerprinting device: 23.192.228.80
+2025-09-14 00:06:28,921 - modules.manager - INFO - Securely managing device: 23.192.228.80
+2025-09-14 00:06:28,921 - modules.manager - INFO - Auto-detecting SSH key for 23.192.228.80
+2025-09-14 00:06:28,921 - modules.manager - INFO - Found 0 potential SSH keys for 23.192.228.80
+2025-09-14 00:06:28,921 - modules.manager - WARNING - No SSH key found for 23.192.228.80
+2025-09-14 00:06:28,921 - modules.manager - ERROR - No SSH key found for device 23.192.228.80
+2025-09-14 00:11:27,686 - modules.scanner - INFO - Nmap located at: C:\Users\JJ\Downloads\New folder (6)\project\..\break\nmap.exe
+2025-09-14 00:11:27,686 - modules.scanner - INFO - Nmap located at: C:\Users\JJ\Downloads\New folder (6)\project\..\break\nmap.exe
+2025-09-14 00:11:27,686 - modules.scanner - INFO - Fingerprinting device: 23.192.228.80
+2025-09-14 00:12:02,512 - modules.manager - INFO - Managing device: 23.192.228.80
+2025-09-14 00:12:12,523 - modules.manager - ERROR - Error managing device 23.192.228.80: timed out
+2025-09-14 00:39:37,841 - modules.scanner - INFO - Nmap located at: C:\Users\JJ\Downloads\New folder (6)\project\..\break\nmap.exe
+2025-09-14 00:39:37,842 - modules.network_blocker - INFO - Loaded 1 blocked IPs from persistent storage
+2025-09-14 00:39:37,843 - modules.scanner - INFO - Nmap located at: C:\Users\JJ\Downloads\New folder (6)\project\..\break\nmap.exe
+2025-09-14 00:39:37,843 - modules.scanner - INFO - Fingerprinting device: 23.192.228.80
+2025-09-14 00:40:27,124 - modules.manager - INFO - Checking if device 23.192.228.80 is reachable on port 22
+2025-09-14 00:40:32,139 - modules.manager - WARNING - Device 23.192.228.80 is not reachable on port 22
+2025-09-14 00:42:45,286 - modules.scanner - INFO - Nmap located at: C:\Users\JJ\Downloads\New folder (6)\project\..\break\nmap.exe
+2025-09-14 00:42:45,288 - modules.network_blocker - INFO - Loaded 1 blocked IPs from persistent storage
+2025-09-14 00:42:45,288 - modules.scanner - INFO - Nmap located at: C:\Users\JJ\Downloads\New folder (6)\project\..\break\nmap.exe
+2025-09-14 00:42:45,288 - modules.scanner - INFO - Fingerprinting device: 23.192.228.80
+2025-09-14 00:43:32,457 - modules.scanner - INFO - Nmap located at: C:\Users\JJ\Downloads\New folder (6)\project\..\break\nmap.exe
+2025-09-14 00:43:32,459 - modules.network_blocker - INFO - Loaded 1 blocked IPs from persistent storage
+2025-09-14 00:43:32,611 - modules.scanner - INFO - Scanning server network: 192.168.1.0/24
+2025-09-14 00:43:39,820 - modules.scanner - INFO - Found 3 devices on server network

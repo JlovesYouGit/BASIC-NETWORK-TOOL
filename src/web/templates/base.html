@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Network Management Tool{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+        .sidebar {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+        }
+        .main-content {
+            margin-left: 250px;
+        }
+        .card {
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .device-card {
+            transition: transform 0.2s;
+        }
+        .device-card:hover {
+            transform: translateY(-5px);
+        }
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .status-online {
+            background-color: #28a745;
+        }
+        .status-offline {
+            background-color: #dc3545;
+        }
+        .blocked-device {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-network-wired"></i> Network Management Tool
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-user"></i> Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-cog"></i> Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="scanLocalNetwork()">
+                                <i class="fas fa-search"></i> Scan Local Network
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="scanServerNetwork()">
+                                <i class="fas fa-server"></i> Scan Server Network
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="scanWebServer()">
+                                <i class="fas fa-globe"></i> Scan Web Server
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-history"></i> Scan History
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-chart-bar"></i> Analytics
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Global variables
+        let devices = [];
+        
+        // Function to scan local network
+        function scanLocalNetwork() {
+            $('#loading').show();
+            $.get('/api/scan/local')
+                .done(function(data) {
+                    if (data.status === 'success') {
+                        devices = data.devices;
+                        renderDeviceList(devices);
+                        updateDashboardStats(devices);
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .fail(function() {
+                    alert('Failed to scan local network');
+                })
+                .always(function() {
+                    $('#loading').hide();
+                });
+        }
+        
+        // Function to scan server network
+        function scanServerNetwork() {
+            $('#loading').show();
+            $.get('/api/scan/server')
+                .done(function(data) {
+                    if (data.status === 'success') {
+                        devices = data.devices;
+                        renderDeviceList(devices);
+                        updateDashboardStats(devices);
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .fail(function() {
+                    alert('Failed to scan server network');
+                })
+                .always(function() {
+                    $('#loading').hide();
+                });
+        }
+        
+        // Function to scan web server
+        function scanWebServer() {
+            $('#loading').show();
+            $.get('/api/scan/web')
+                .done(function(data) {
+                    if (data.status === 'success') {
+                        devices = data.devices;
+                        renderDeviceList(devices);
+                        updateDashboardStats(devices);
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .fail(function() {
+                    alert('Failed to scan web server');
+                })
+                .always(function() {
+                    $('#loading').hide();
+                });
+        }
+        
+        // Function to update dashboard statistics
+        function updateDashboardStats(devices) {
+            $('#total-devices').text(devices.length);
+            $('#online-devices').text(devices.filter(d => d.mac).length);
+            $('#server-devices').text(devices.filter(d => d.ports && d.ports.length > 0).length);
+            $('#last-scan').text(new Date().toLocaleString());
+        }
+        
+        // Function to render device list
+        function renderDeviceList(devices) {
+            let html = '';
+            if (devices.length === 0) {
+                html = '<div class="alert alert-info">No devices found.</div>';
+            } else {
+                html = '<div class="row">';
+                devices.forEach(function(device, index) {
+                    // Check if device is blocked (this would come from a database or status check in a real implementation)
+                    // For demonstration, we'll simulate some devices as blocked
+                    const isBlocked = device.blocked || (device.ip && device.ip.endsWith('100')); // Simple simulation
+                    const cardClass = isBlocked ? 'blocked-device' : '';
+                    
+                    html += `
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card device-card ${cardClass}">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <span class="status-indicator status-online"></span>
+                                        Device ${index + 1}
+                                        ${isBlocked ? '<span class="badge bg-danger float-end">BLOCKED</span>' : ''}
+                                    </h5>
+                                    <p class="card-text">
+                                        <strong>IP:</strong> ${device.ip || 'N/A'}<br>
+                                        <strong>MAC:</strong> ${device.mac || 'N/A'}<br>
+                                        <strong>Hostname:</strong> ${device.hostname || 'N/A'}<br>
+                                        <strong>OS:</strong> ${device.os || 'Unknown'}
+                                    </p>
+                                    <button class="btn btn-primary btn-sm" onclick="fingerprintDevice('${device.ip}')">
+                                        <i class="fas fa-fingerprint"></i> Fingerprint
+                                    </button>
+                                    <button class="btn btn-warning btn-sm" onclick="manageDevice('${device.ip}')">
+                                        <i class="fas fa-cog"></i> Manage
+                                    </button>
+                                    ${isBlocked ? 
+                                        `<button class="btn btn-success btn-sm" onclick="unblockDevice('${device.ip}')">
+                                            <i class="fas fa-unlock"></i> Unblock
+                                        </button>` : 
+                                        `<button class="btn btn-danger btn-sm" onclick="blockDevice('${device.ip}')">
+                                            <i class="fas fa-ban"></i> Block
+                                        </button>`}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            }
+            $('#device-list').html(html);
+        }
+        
+        // Function to fingerprint a device
+        function fingerprintDevice(ip) {
+            $('#loading').show();
+            $.get(`/api/device/${ip}/fingerprint`)
+                .done(function(data) {
+                    if (data.status === 'success') {
+                        alert('Device fingerprinted successfully. Check console for details.');
+                        console.log(data.device);
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .fail(function() {
+                    alert('Failed to fingerprint device');
+                })
+                .always(function() {
+                    $('#loading').hide();
+                });
+        }
+        
+        // Function to manage a device
+        function manageDevice(ip) {
+            $('#deviceIp').val(ip);
+            $('#username').val('');
+            $('#password').val('');
+            $('#manageModal').modal('show');
+        }
+        
+        // Function to submit device management
+        function submitManageDevice() {
+            const ip = $('#deviceIp').val();
+            const username = $('#username').val();
+            const password = $('#password').val();
+            
+            if (username && password) {
+                $('#loading').show();
+                $.post(`/api/device/${ip}/manage`, {
+                    username: username,
+                    password: password
+                })
+                .done(function(data) {
+                    if (data.status === 'success') {
+                        alert('Device managed successfully.');
+                        $('#manageModal').modal('hide');
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .fail(function() {
+                    alert('Failed to manage device');
+                })
+                .always(function() {
+                    $('#loading').hide();
+                });
+            } else {
+                alert('Please enter both username and password.');
+            }
+        }
+        
+        // Function to block a device
+        function blockDevice(ip) {
+            $('#blockDeviceIp').text(ip);
+            $('#blockModal').modal('show');
+        }
+        
+        // Function to submit device blocking
+        function submitBlockDevice() {
+            const ip = $('#blockDeviceIp').text();
+            $('#loading').show();
+            $('#blockModal').modal('hide');
+            
+            $.post(`/api/device/${ip}/block`)
+                .done(function(data) {
+                    if (data.status === 'success') {
+                        alert(data.message);
+                        // Refresh the device list to show the blocked status
+                        scanLocalNetwork();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .fail(function() {
+                    alert('Failed to block device');
+                })
+                .always(function() {
+                    $('#loading').hide();
+                });
+        }
+        
+        // Function to unblock a device
+        function unblockDevice(ip) {
+            $('#unblockDeviceIp').text(ip);
+            $('#unblockModal').modal('show');
+        }
+        
+        // Function to submit device unblocking
+        function submitUnblockDevice() {
+            const ip = $('#unblockDeviceIp').text();
+            $('#loading').show();
+            $('#unblockModal').modal('hide');
+            
+            $.post(`/api/device/${ip}/unblock`)
+                .done(function(data) {
+                    if (data.status === 'success') {
+                        alert(data.message);
+                        // Refresh the device list to show the unblocked status
+                        scanLocalNetwork();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .fail(function() {
+                    alert('Failed to unblock device');
+                })
+                .always(function() {
+                    $('#loading').hide();
+                });
+        }
+        
+        // Initialize the page
+        $(document).ready(function() {
+            // Load initial device list
+            scanLocalNetwork();
+        });
+    </script>
+</body>
+</html>

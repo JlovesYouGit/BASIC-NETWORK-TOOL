@@ -1,0 +1,96 @@
+/* Custom styles for Network Management Tool */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.sidebar .nav-link {
+    color: #495057;
+    padding: 0.5rem 1rem;
+    margin: 0.1rem 0;
+    border-radius: 0.25rem;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #e9ecef;
+}
+
+.sidebar .nav-link.active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.device-card {
+    cursor: pointer;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.status-online {
+    background-color: #28a745;
+}
+
+.status-offline {
+    background-color: #dc3545;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #000;
+}
+
+.btn-warning:hover {
+    background-color: #ffca2c;
+    border-color: #ffc720;
+}
+
+.modal-content {
+    border-radius: 10px;
+}
+
+.display-4 {
+    font-size: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: relative;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+}
